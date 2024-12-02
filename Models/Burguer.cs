@@ -9,9 +9,27 @@ namespace MABurger2.Models {
         [Required]
         public string? Name { get; set; }
         public bool WithCheese { get; set; }
-        [Range(0.01, 99.99)]
+        [VerificandoRango]
         public decimal Price { get; set; }
     
         public List<Promo>? Promos { get; set; }
+    }
+
+    public class VerificandoRango : ValidationAttribute
+    {
+        public override bool IsValid(object? value)
+        {
+            decimal valor = (decimal)value;
+            if (valor < 1 || valor > 30)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+
+        }
+
     }
 }
